@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 25 2021 г., 11:56
+-- Время создания: Авг 25 2021 г., 12:52
 -- Версия сервера: 5.7.33
 -- Версия PHP: 7.4.21
 
@@ -61,14 +61,21 @@ CREATE TABLE `users` (
   `email` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `surname` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `month` tinyint(1) UNSIGNED DEFAULT NULL,
-  `day` tinyint(1) UNSIGNED DEFAULT NULL,
+  `day` int(11) UNSIGNED DEFAULT NULL,
+  `month` int(11) UNSIGNED DEFAULT NULL,
   `year` int(11) UNSIGNED DEFAULT NULL,
   `country` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `privacy` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `registration_time` int(191) DEFAULT NULL
+  `registration_time` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `login`, `email`, `name`, `surname`, `day`, `month`, `year`, `country`, `privacy`, `password`, `registration_time`) VALUES
+(1, 'TestLog', 'TestEmail@gmail.com', 'TestName', 'TestSurname', 14, 9, 2006, 'ANGUILLA', 'on', '$2y$10$ZlKNP5fci0JuxGrkqMnNpeTJB8cJw1XiBhcIk2341cWCj1Y0.bI.G', 1629885102);
 
 --
 -- Индексы сохранённых таблиц
@@ -100,7 +107,7 @@ ALTER TABLE `country`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -74,8 +74,8 @@ if (isset($_POST['do_signup'])) {
 		$user->name  = $_POST['name'];
 		$user->surname  = $_POST['surname'];
 
-		$user->month = $_POST['birthDate_d'];
-		$user->day = $_POST['birthDate_m'];
+		$user->day = $_POST['birthDate_d'];
+		$user->month = $_POST['birthDate_m'];
 		$user->year = $_POST['birthDate_y'];
 
 		$user->country = $_POST['country'];
