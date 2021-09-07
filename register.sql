@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 25 2021 г., 12:52
+-- Время создания: Сен 07 2021 г., 22:49
 -- Версия сервера: 5.7.33
 -- Версия PHP: 7.4.21
 
@@ -28,15 +28,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `country` (
-  `id` int(11) NOT NULL,
-  `country` varchar(80) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `id_country` int(11) NOT NULL,
+  `country` varchar(80) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Дамп данных таблицы `country`
 --
 
-INSERT INTO `country` (`id`, `country`) VALUES
+INSERT INTO `country` (`id_country`, `country`) VALUES
 (1, 'AFGHANISTAN'),
 (2, 'ALBANIA'),
 (3, 'ALGERIA'),
@@ -47,7 +47,235 @@ INSERT INTO `country` (`id`, `country`) VALUES
 (8, 'ANTARCTICA'),
 (9, 'ANTIGUA AND BARBUDA'),
 (10, 'ARGENTINA'),
-(11, 'ARMENIA');
+(11, 'ARMENIA'),
+(12, 'ARUBA'),
+(13, 'AUSTRALIA'),
+(14, 'AUSTRIA'),
+(15, 'AZERBAIJAN'),
+(16, 'BAHAMAS'),
+(17, 'BAHRAIN'),
+(18, 'BANGLADESH'),
+(19, 'BARBADOS'),
+(20, 'BELARUS'),
+(21, 'BELGIUM'),
+(22, 'BELIZE'),
+(23, 'BENIN'),
+(24, 'BERMUDA'),
+(25, 'BHUTAN'),
+(26, 'BOLIVIA'),
+(27, 'BOSNIA AND HERZEGOVINA'),
+(28, 'BOTSWANA'),
+(29, 'BOUVET ISLAND'),
+(30, 'BRAZIL'),
+(31, 'BRITISH INDIAN OCEAN TERRITORY'),
+(32, 'BRUNEI DARUSSALAM'),
+(33, 'BULGARIA'),
+(34, 'BURKINA FASO'),
+(35, 'BURUNDI'),
+(36, 'CAMBODIA'),
+(37, 'CAMEROON'),
+(38, 'CANADA'),
+(39, 'CAPE VERDE'),
+(40, 'CAYMAN ISLANDS'),
+(41, 'CENTRAL AFRICAN REPUBLIC'),
+(42, 'CHAD'),
+(43, 'CHILE'),
+(44, 'CHINA'),
+(45, 'CHRISTMAS ISLAND'),
+(46, 'COCOS (KEELING) ISLANDS'),
+(47, 'COLOMBIA'),
+(48, 'COMOROS'),
+(49, 'CONGO'),
+(50, 'CONGO, THE DEMOCRATIC REPUBLIC OF THE'),
+(51, 'COOK ISLANDS'),
+(52, 'COSTA RICA'),
+(53, 'COTE D\'IVOIRE'),
+(54, 'CROATIA'),
+(55, 'CUBA'),
+(56, 'CYPRUS'),
+(57, 'CZECH REPUBLIC'),
+(58, 'DENMARK'),
+(59, 'DJIBOUTI'),
+(60, 'DOMINICA'),
+(61, 'DOMINICAN REPUBLIC'),
+(62, 'ECUADOR'),
+(63, 'EGYPT'),
+(64, 'EL SALVADOR'),
+(65, 'EQUATORIAL GUINEA'),
+(66, 'ERITREA'),
+(67, 'ESTONIA'),
+(68, 'ETHIOPIA'),
+(69, 'FALKLAND ISLANDS (MALVINAS)'),
+(70, 'FAROE ISLANDS'),
+(71, 'FIJI'),
+(72, 'FINLAND'),
+(73, 'FRANCE'),
+(74, 'FRENCH GUIANA'),
+(75, 'FRENCH POLYNESIA'),
+(76, 'FRENCH SOUTHERN TERRITORIES'),
+(77, 'GABON'),
+(78, 'GAMBIA'),
+(79, 'GEORGIA'),
+(80, 'GERMANY'),
+(81, 'GHANA'),
+(82, 'GIBRALTAR'),
+(83, 'GREECE'),
+(84, 'GREENLAND'),
+(85, 'GRENADA'),
+(86, 'GUADELOUPE'),
+(87, 'GUAM'),
+(88, 'GUATEMALA'),
+(89, 'GUINEA'),
+(90, 'GUINEA-BISSAU'),
+(91, 'GUYANA'),
+(92, 'HAITI'),
+(93, 'HEARD ISLAND AND MCDONALD ISLANDS'),
+(94, 'HOLY SEE (VATICAN CITY STATE)'),
+(95, 'HONDURAS'),
+(96, 'HONG KONG'),
+(97, 'HUNGARY'),
+(98, 'ICELAND'),
+(99, 'INDIA'),
+(100, 'INDONESIA'),
+(101, 'IRAN, ISLAMIC REPUBLIC OF'),
+(102, 'IRAQ'),
+(103, 'IRELAND'),
+(104, 'ISRAEL'),
+(105, 'ITALY'),
+(106, 'JAMAICA'),
+(107, 'JAPAN'),
+(108, 'JORDAN'),
+(109, 'KAZAKHSTAN'),
+(110, 'KENYA'),
+(111, 'KIRIBATI'),
+(112, 'KOREA, DEMOCRATIC PEOPLE\'S REPUBLIC OF'),
+(113, 'KOREA, REPUBLIC OF'),
+(114, 'KUWAIT'),
+(115, 'KYRGYZSTAN'),
+(116, 'LAO PEOPLE\'S DEMOCRATIC REPUBLIC'),
+(117, 'LATVIA'),
+(118, 'LEBANON'),
+(119, 'LESOTHO'),
+(120, 'LIBERIA'),
+(121, 'LIBYAN ARAB JAMAHIRIYA'),
+(122, 'LIECHTENSTEIN'),
+(123, 'LITHUANIA'),
+(124, 'LUXEMBOURG'),
+(125, 'MACAO'),
+(126, 'MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF'),
+(127, 'MADAGASCAR'),
+(128, 'MALAWI'),
+(129, 'MALAYSIA'),
+(130, 'MALDIVES'),
+(131, 'MALI'),
+(132, 'MALTA'),
+(133, 'MARSHALL ISLANDS'),
+(134, 'MARTINIQUE'),
+(135, 'MAURITANIA'),
+(136, 'MAURITIUS'),
+(137, 'MAYOTTE'),
+(138, 'MEXICO'),
+(139, 'MICRONESIA, FEDERATED STATES OF'),
+(140, 'MOLDOVA, REPUBLIC OF'),
+(141, 'MONACO'),
+(142, 'MONGOLIA'),
+(143, 'MONTSERRAT'),
+(144, 'MOROCCO'),
+(145, 'MOZAMBIQUE'),
+(146, 'MYANMAR'),
+(147, 'NAMIBIA'),
+(148, 'NAURU'),
+(149, 'NEPAL'),
+(150, 'NETHERLANDS'),
+(151, 'NETHERLANDS ANTILLES'),
+(152, 'NEW CALEDONIA'),
+(153, 'NEW ZEALAND'),
+(154, 'NICARAGUA'),
+(155, 'NIGER'),
+(156, 'NIGERIA'),
+(157, 'NIUE'),
+(158, 'NORFOLK ISLAND'),
+(159, 'NORTHERN MARIANA ISLANDS'),
+(160, 'NORWAY'),
+(161, 'OMAN'),
+(162, 'PAKISTAN'),
+(163, 'PALAU'),
+(164, 'PALESTINIAN TERRITORY, OCCUPIED'),
+(165, 'PANAMA'),
+(166, 'PAPUA NEW GUINEA'),
+(167, 'PARAGUAY'),
+(168, 'PERU'),
+(169, 'PHILIPPINES'),
+(170, 'PITCAIRN'),
+(171, 'POLAND'),
+(172, 'PORTUGAL'),
+(173, 'PUERTO RICO'),
+(174, 'QATAR'),
+(175, 'REUNION'),
+(176, 'ROMANIA'),
+(177, 'RUSSIAN FEDERATION'),
+(178, 'RWANDA'),
+(179, 'SAINT HELENA'),
+(180, 'SAINT KITTS AND NEVIS'),
+(181, 'SAINT LUCIA'),
+(182, 'SAINT PIERRE AND MIQUELON'),
+(183, 'SAINT VINCENT AND THE GRENADINES'),
+(184, 'SAMOA'),
+(185, 'SAN MARINO'),
+(186, 'SAO TOME AND PRINCIPE'),
+(187, 'SAUDI ARABIA'),
+(188, 'SENEGAL'),
+(189, 'SERBIA AND MONTENEGRO'),
+(190, 'SEYCHELLES'),
+(191, 'SIERRA LEONE'),
+(192, 'SINGAPORE'),
+(193, 'SLOVAKIA'),
+(194, 'SLOVENIA'),
+(195, 'SOLOMON ISLANDS'),
+(196, 'SOMALIA'),
+(197, 'SOUTH AFRICA'),
+(198, 'SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS'),
+(199, 'SPAIN'),
+(200, 'SRI LANKA'),
+(201, 'SUDAN'),
+(202, 'SURINAME'),
+(203, 'SVALBARD AND JAN MAYEN'),
+(204, 'SWAZILAND'),
+(205, 'SWEDEN'),
+(206, 'SWITZERLAND'),
+(207, 'SYRIAN ARAB REPUBLIC'),
+(208, 'TAIWAN, PROVINCE OF CHINA'),
+(209, 'TAJIKISTAN'),
+(210, 'TANZANIA'),
+(211, 'THAILAND'),
+(212, 'TIMOR-LESTE'),
+(213, 'TOGO'),
+(214, 'TOKELAU'),
+(215, 'TONGA'),
+(216, 'TRINIDAD AND TOBAGO'),
+(217, 'TUNISIA'),
+(218, 'TURKEY'),
+(219, 'TURKMENISTAN'),
+(220, 'TURKS AND CAICOS ISLANDS'),
+(221, 'TUVALU'),
+(222, 'UGANDA'),
+(223, 'UKRAINE'),
+(224, 'UNITED ARAB EMIRATES'),
+(225, 'UNITED KINGDOM'),
+(226, 'UNITED STATES'),
+(227, 'UNITED STATES MINOR OUTLYING ISLANDS'),
+(228, 'URUGUAY'),
+(229, 'UZBEKISTAN'),
+(230, 'VANUATU'),
+(231, 'VENEZUELA'),
+(232, 'VIET NAM'),
+(233, 'VIRGIN ISLANDS, BRITISH'),
+(234, 'VIRGIN ISLANDS, U.S.'),
+(235, 'WALLIS AND FUTUNA'),
+(236, 'WESTERN SAHARA'),
+(237, 'YEMEN'),
+(238, 'ZAMBIA'),
+(239, 'ZIMBABWE');
 
 -- --------------------------------------------------------
 
@@ -57,16 +285,16 @@ INSERT INTO `country` (`id`, `country`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
-  `login` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `surname` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `login` varchar(191) CHARACTER SET utf8 DEFAULT NULL,
+  `email` varchar(191) CHARACTER SET utf8 DEFAULT NULL,
+  `name` varchar(191) CHARACTER SET utf8 DEFAULT NULL,
+  `surname` varchar(191) CHARACTER SET utf8 DEFAULT NULL,
   `day` int(11) UNSIGNED DEFAULT NULL,
   `month` int(11) UNSIGNED DEFAULT NULL,
   `year` int(11) UNSIGNED DEFAULT NULL,
-  `country` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `privacy` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `country` varchar(80) CHARACTER SET utf8 DEFAULT NULL,
+  `privacy` varchar(191) CHARACTER SET utf8 DEFAULT NULL,
+  `password` varchar(191) CHARACTER SET utf8 DEFAULT NULL,
   `registration_time` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
@@ -75,7 +303,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `email`, `name`, `surname`, `day`, `month`, `year`, `country`, `privacy`, `password`, `registration_time`) VALUES
-(1, 'TestLog', 'TestEmail@gmail.com', 'TestName', 'TestSurname', 14, 9, 2006, 'ANGUILLA', 'on', '$2y$10$ZlKNP5fci0JuxGrkqMnNpeTJB8cJw1XiBhcIk2341cWCj1Y0.bI.G', 1629885102);
+(25, 'TestLog', 'TestEmail@gmail.com', 'TestName', 'TestSurname', 1, 1, 2021, 'AFGHANISTAN', 'on', 'b0baee9d279d34fa1dfd71aadb908c3f', 1630873080);
 
 --
 -- Индексы сохранённых таблиц
@@ -85,7 +313,7 @@ INSERT INTO `users` (`id`, `login`, `email`, `name`, `surname`, `day`, `month`, 
 -- Индексы таблицы `country`
 --
 ALTER TABLE `country`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_country`);
 
 --
 -- Индексы таблицы `users`
@@ -101,13 +329,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `country`
 --
 ALTER TABLE `country`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_country` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
