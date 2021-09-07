@@ -1,37 +1,29 @@
 <?php
+session_start();
 $title = "Форма авторизации";
 require __DIR__ . '/header.php';
-require "db.php";
+require "/OpenServer/domains/TaskTestPhpTwo/dbConfig/db.php";
 
 if (isset($_POST['do_login'])) {
-
 	$errors = array();
-
 	$inputValue = $_POST['login'];
-	$searchColumn = strpos($inputValue, "@") ? 'email' : 'login';
-	$user = R::findOne('users', "$searchColumn = ?", array($inputValue));
-
-	if ($user) {
-
-		if (password_verify($_POST['password'], $user->password)) {
-
-			$_SESSION['logged_user'] = $user;
-
-			header('Location: index.php');
-		} else {
-
-			$errors[] = 'Пароль неверно введен!';
-		}
+	$check_email = Is_email($inputValue);
+	if ($check_email) {
+		$result = $mysqli->query("SELECT * FROM `users` WHERE `email` = '$inputValue' AND `password` = '$password'");
 	} else {
-		$errors[] = 'Пользователь с таким логином или Email не найден!';
+		$result = $mysqli->query("SELECT * FROM `users` WHERE `login` = '$inputValue' AND `password` = '$password'");
 	}
-
+	$user = $result->fetch_assoc();
+	if (count($user) == 0) {
+		$errors[] = 'Пользователь с таким логином или Email не найден!';
+	} else {
+		$_SESSION['logged_user'] = $user;
+		header('Location: index.php');
+	}
 	if (!empty($errors)) {
-
 		echo '<div style="color: red; ">' . array_shift($errors) . '</div><hr>';
 	}
 }
-
 ?>
 
 <div class="container mt-4">

@@ -2,7 +2,7 @@
 
 $title = "Главная страница";
 require __DIR__ . '/header.php';
-require "db.php";
+require "/OpenServer/domains/TaskTestPhpTwo/dbConfig/db.php";
 ?>
 
 <div class="container mt-4">
@@ -17,14 +17,15 @@ require "db.php";
 
 
 <?php if (isset($_SESSION['logged_user'])) : ?>
-	Привет, <?php echo $_SESSION['logged_user']->name; ?>,
-	<?php echo $_SESSION['logged_user']->email; ?></br>
-
-
+	<?php
+	$user = $_SESSION['logged_user'];
+	echo "Привет, ";
+	echo $user['name'];
+	$userEmail = $user['email'];
+	echo " ($userEmail)" . '</br>';
+	?>
 	<a href="logout.php">Выйти</a>
 <?php else : ?>
-
-
 	<a href="login.php">Авторизоваться</a><br>
 	<a href="signup.php">Регистрация</a>
 <?php endif; ?>

@@ -2,113 +2,109 @@
 session_start();
 $tite = "Форма регистриации";
 require_once __DIR__ . "/header.php";
-require "db.php";
+require "/OpenServer/domains/TaskTestPhpTwo/dbConfig/db.php";
 
 if (isset($_POST['do_signup'])) {
 	$errors = array();
 
-
-	if (trim($_POST['login']) == '') {
+	if (empty($login)) {
 		$errors['login'] = 'Введите логин!';
 	}
-	if (trim($_POST['email']) == '') {
+
+	if (empty($email)) {
 		$errors['email'] = 'Введите Email!';
 	}
-	if (trim($_POST['name']) == '') {
+
+	if (empty($name)) {
 		$errors['name'] = 'Введите Имя!';
 	}
-	if (trim($_POST['surname']) == '') {
+
+	if (empty($surname)) {
 		$errors['surname'] = 'Введите Фамилию!';
 	}
-	if ($_POST['password'] == '') {
+
+	if (empty($password)) {
 		$errors['password'] = 'Введите пароль!';
 	}
 
-	$password2 = $_POST['password_2'];
-	if (empty($password2) || $password2 != $_POST['password']) {
+	if (empty($password2) || $password2 != $password) {
 		$errors['password_2'] = 'Повторный пароль введен не верно!';
 	}
-	if ((mb_strlen($_POST['login']) < 5 || mb_strlen($_POST['login']) > 35) && empty($errors['login'])) {
+
+	if ((mb_strlen($login) < 5 || mb_strlen($login) > 35) && empty($errors['login'])) {
 		$errors['login'] = 'Недопустимая длина логина';
 	}
-	if ((mb_strlen($_POST['name']) < 3 || mb_strlen($_POST['name']) > 35) && empty($errors['name'])) {
+
+	if ((mb_strlen($name) < 3 || mb_strlen($name) > 35) && empty($errors['name'])) {
 		$errors['name'] = 'Недопустимая длина имени';
 	}
-	if ((mb_strlen($_POST['surname']) < 5 || mb_strlen($_POST['surname']) > 35) && empty($errors['surname'])) {
+
+	if ((mb_strlen($surname) < 5 || mb_strlen($surname) > 35) && empty($errors['surname'])) {
 		$errors['surname'] = 'Недопустимая длина фамилии';
 	}
-	if (preg_match("/[^a-zA-Z0-9]/i", $_POST['login']) && empty($errors['login'])) {
-		$errors['login'] = 'Вы ввели некоректный сивол!';
-	}
-	if (!preg_match("/[0-9a-z_]+@[0-9a-z_^\.]+\.[a-z]{2,3}/i", $_POST['email']) && empty($errors['email'])) {
 
+	if (preg_match("/[^a-zA-Z]/i", $name) && empty($errors['name'])) {
+		$errors['name'] = 'Вы ввели некоректный сивол!Разрешены только буквы!';
+	}
+
+	if (preg_match("/[^a-zA-Z]/i", $surname) && empty($errors['surname'])) {
+		$errors['surname'] = 'Вы ввели некоректный сивол!Разрешены только буквы!';
+	}
+
+	if (preg_match("/[^a-zA-Z0-9]/i", $login) && empty($errors['login'])) {
+		$errors['login'] = 'Вы ввели некоректный сивол!Разрешены только буквы и цифры!';
+	}
+
+	if (preg_match("/[^a-zA-Z0-9]/i", $password) && empty($errors['password'])) {
+		$errors['password'] = 'Вы ввели некоректный сивол!Разрешены только буквы и цифры!';
+	}
+
+	if (preg_match("/[^a-zA-Z0-9]/i", $password2) && empty($errors['password2'])) {
+		$errors['password2'] = 'Вы ввели некоректный сивол!Разрешены только буквы и цифры!';
+	}
+
+	if (!preg_match("/[0-9a-z_]+@[0-9a-z_^\.]+\.[a-z]{2,3}/i", $email) && empty($errors['email'])) {
 		$errors['email'] = 'Неверно введен е-mail';
 	}
-	if (R::count('users', "login = ?", array($_POST['login'])) > 0 && empty($errors['login'])) {
+
+	$query = $mysqli->query("SELECT * FROM `users` WHERE `login` = '$login'");
+	$fetchedArray = $query->fetch_assoc();
+	if (!empty($fetchedArray['login'])) {
 		$errors['login'] = 'Пользователь стаким логином уже сущесвует!';
 	}
-	if (R::count('users', "email = ?", array($_POST['email'])) > 0 && empty($errors['email'])) {
+
+	$query = $mysqli->query("SELECT * FROM `users` WHERE `email` = '$email'");
+	$fetchedArray = $query->fetch_assoc();
+	if (!empty($fetchedArray['email'])) {
 		$errors['email'] = 'Пользователь стаким Email уже сущесвует!';
 	}
 
-	if ($_POST['privacy'] == false) {
+	if ($privacy == false) {
 		$errors['privacy'] = 'Дайте свое согласие на обработку данных';
 	}
-	$dateDay = $_POST['birthDate_d'];
-	$dateMonth = $_POST['birthDate_m'];
-	$dateYear = $_POST['birthDate_y'];
-
-	$chosenDateTime = "$dateDay/$dateMonth/$dateYear";
-	$currentDateTime = date("d/m/Y");
-	if ($chosenDateTime > $currentDateTime) {
+	$currentDateTime = "$day/$month/$year";
+	$currentDateTimeMy = date("j/n/Y");
+	if ($currentDateTime > $currentDateTimeMy) {
 		$errors['date'] = 'Введена неправильная дата!';
 	}
 
 	if (empty($errors)) {
 
-
-		$user = R::dispense('users');
-
-		$user->login  = $_POST['login'];
-		$user->email  = $_POST['email'];
-		$user->name  = $_POST['name'];
-		$user->surname  = $_POST['surname'];
-
-		$user->day = $_POST['birthDate_d'];
-		$user->month = $_POST['birthDate_m'];
-		$user->year = $_POST['birthDate_y'];
-
-		$user->country = $_POST['country'];
-
-		$user->privacy = $_POST['privacy'];
-
-		$user->password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-		$user->registrationTime = strtotime("now");
-
-
-		R::store($user);
-
-		$autoLog = $_POST['login'];
-		$user = R::findOne('users', "login = ?", array($autoLog));
+		$mysqli->query("INSERT INTO `users` (`login`, `email`, `name`, `surname`,`day`,`month`,`year`,`country`,`privacy`,`password`,`registration_time`)
+		VALUES('$login', '$email', '$name','$surname', '$day', '$month','$year', '$country', '$privacy','$password', '$registrationTime')");
+		$mysqliResult = $mysqli->query("SELECT * FROM `users` WHERE `login` = '$login'");
+		$user = $mysqliResult->fetch_assoc();
 		$_SESSION['logged_user'] = $user;
+		$mysqli->close();
 		header('Location:index.php');
-	} else {
-		$savedLogin = $_POST['login'];
-		$savedEmail = $_POST['email'];
-		$savedName = $_POST['name'];
-		$savedSurname = $_POST['surname'];
-
-		$savedPrivacy = $_POST['privacy'];
+		return;
 	}
+	$savedLogin = $_POST['login'];
+	$savedEmail = $_POST['email'];
+	$savedName = $_POST['name'];
+	$savedSurname = $_POST['surname'];
+	$savedPrivacy = $_POST['privacy'];
 }
-
-
-$mysqli = new MySQLi('localhost', 'root', '', 'register');
-
-$resultSet = $mysqli->query("SELECT country FROM country");
-
-
 ?>
 
 <div class="container mt-4">
@@ -165,7 +161,7 @@ $resultSet = $mysqli->query("SELECT country FROM country");
 							<?php
 							while ($rows = $resultSet->fetch_assoc()) {
 								$country = $rows['country'];
-								echo "<option value = '$country'>$country </option>";
+								echo "<option value = '$country'> $country </option>";
 							}
 							?>
 						</select>
