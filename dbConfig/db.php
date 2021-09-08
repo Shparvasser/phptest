@@ -9,8 +9,8 @@ $month = $_POST['birthDate_m'];
 $year = $_POST['birthDate_y'];
 $countryId = $_POST['country_id'];
 $privacy = $_POST['privacy'];
-$password = md5($_POST['password']);
-$password2 = md5($_POST['password_2']);
+$password = $_POST['password'];
+$password2 = $_POST['password_2'];
 $registrationTime = strtotime("now");
 
 $server = "localhost";
@@ -29,9 +29,9 @@ $mysqli->set_charset('utf8');
 $resultSet = $mysqli->query("SELECT * FROM country");
 
 
-function Is_email($a)
+function Is_email($user)
 {
-	if (filter_var($a, FILTER_VALIDATE_EMAIL)) {
+	if (filter_var($user, FILTER_VALIDATE_EMAIL)) {
 		return true;
 	} else {
 		return false;
