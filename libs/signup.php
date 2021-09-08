@@ -89,9 +89,9 @@ if (isset($_POST['do_signup'])) {
 	}
 
 	if (empty($errors)) {
-		$passHash = password_hash($password, PASSWORD_BCRYPT);
+		$password = md5($password);
 		$mysqli->query("INSERT INTO `users` (`login`, `email`, `name`, `surname`,`day`,`month`,`year`,`country_id`,`privacy`,`password`,`registration_time`)
-		VALUES('$login', '$email', '$name','$surname', '$day', '$month','$year', '$countryId', '$privacy','$passHash', '$registrationTime')");
+		VALUES('$login', '$email', '$name','$surname', '$day', '$month','$year', '$countryId', '$privacy','$password', '$registrationTime')");
 		$mysqliResult = $mysqli->query("SELECT * FROM `users` WHERE `login` = '$login'");
 		$user = $mysqliResult->fetch_assoc();
 		$_SESSION['logged_user'] = $user;

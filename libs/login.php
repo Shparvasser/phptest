@@ -8,6 +8,7 @@ if (isset($_POST['do_login'])) {
 	$errors = array();
 	$inputValue = $_POST['login'];
 	$check_email = Is_email($inputValue);
+	$password = md5($password);
 	if ($check_email) {
 		$result = $mysqli->query("SELECT * FROM `users` WHERE `email` = '$inputValue' AND `password` = '$password'");
 	} else {
@@ -23,6 +24,7 @@ if (isset($_POST['do_login'])) {
 	if (!empty($errors)) {
 		echo '<div style="color: red; ">' . array_shift($errors) . '</div><hr>';
 	}
+	$mysqli->close();
 }
 ?>
 
