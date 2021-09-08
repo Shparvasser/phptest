@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Сен 07 2021 г., 22:49
+-- Время создания: Сен 08 2021 г., 18:43
 -- Версия сервера: 5.7.33
 -- Версия PHP: 7.4.21
 
@@ -28,15 +28,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `country` (
-  `id_country` int(11) NOT NULL,
-  `country` varchar(80) CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `country_id` int(11) UNSIGNED NOT NULL,
+  `country` varchar(80) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `country`
 --
 
-INSERT INTO `country` (`id_country`, `country`) VALUES
+INSERT INTO `country` (`country_id`, `country`) VALUES
 (1, 'AFGHANISTAN'),
 (2, 'ALBANIA'),
 (3, 'ALGERIA'),
@@ -285,25 +285,25 @@ INSERT INTO `country` (`id_country`, `country`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
-  `login` varchar(191) CHARACTER SET utf8 DEFAULT NULL,
-  `email` varchar(191) CHARACTER SET utf8 DEFAULT NULL,
-  `name` varchar(191) CHARACTER SET utf8 DEFAULT NULL,
-  `surname` varchar(191) CHARACTER SET utf8 DEFAULT NULL,
+  `login` varchar(191) DEFAULT NULL,
+  `email` varchar(191) DEFAULT NULL,
+  `name` varchar(191) DEFAULT NULL,
+  `surname` varchar(191) DEFAULT NULL,
   `day` int(11) UNSIGNED DEFAULT NULL,
   `month` int(11) UNSIGNED DEFAULT NULL,
   `year` int(11) UNSIGNED DEFAULT NULL,
-  `country` varchar(80) CHARACTER SET utf8 DEFAULT NULL,
-  `privacy` varchar(191) CHARACTER SET utf8 DEFAULT NULL,
-  `password` varchar(191) CHARACTER SET utf8 DEFAULT NULL,
+  `country_id` int(11) UNSIGNED NOT NULL,
+  `privacy` varchar(191) DEFAULT NULL,
+  `password` varchar(191) DEFAULT NULL,
   `registration_time` int(11) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `email`, `name`, `surname`, `day`, `month`, `year`, `country`, `privacy`, `password`, `registration_time`) VALUES
-(25, 'TestLog', 'TestEmail@gmail.com', 'TestName', 'TestSurname', 1, 1, 2021, 'AFGHANISTAN', 'on', 'b0baee9d279d34fa1dfd71aadb908c3f', 1630873080);
+INSERT INTO `users` (`id`, `login`, `email`, `name`, `surname`, `day`, `month`, `year`, `country_id`, `privacy`, `password`, `registration_time`) VALUES
+(32, 'TestLog', 'TestEmail@gmail.com', 'TestName', 'TestSurname', 27, 11, 1984, 116, 'on', '25f9e794323b453885f5181f1b624d0b', 1631114736);
 
 --
 -- Индексы сохранённых таблиц
@@ -313,13 +313,14 @@ INSERT INTO `users` (`id`, `login`, `email`, `name`, `surname`, `day`, `month`, 
 -- Индексы таблицы `country`
 --
 ALTER TABLE `country`
-  ADD PRIMARY KEY (`id_country`);
+  ADD PRIMARY KEY (`country_id`);
 
 --
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `country_id` (`country_id`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -329,13 +330,23 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `country`
 --
 ALTER TABLE `country`
-  MODIFY `id_country` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
+  MODIFY `country_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `country` (`country_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -7,7 +7,7 @@ $surname = $_POST['surname'];
 $day = $_POST['birthDate_d'];
 $month = $_POST['birthDate_m'];
 $year = $_POST['birthDate_y'];
-$country = $_POST['country'];
+$countryId = $_POST['country_id'];
 $privacy = $_POST['privacy'];
 $password = md5($_POST['password']);
 $password2 = md5($_POST['password_2']);
@@ -26,7 +26,7 @@ if ($mysqli->connect_errno) {
 
 $mysqli->set_charset('utf8');
 
-$resultSet = $mysqli->query("SELECT country FROM country");
+$resultSet = $mysqli->query("SELECT * FROM country");
 
 
 function Is_email($a)

@@ -2,7 +2,7 @@
 
 $title = "Главная страница";
 require __DIR__ . '/header.php';
-require "/OpenServer/domains/TaskTestPhpTwo/dbConfig/db.php";
+require "/OpenServer/domains/TaskTestPhp/dbConfig/db.php";
 ?>
 
 <div class="container mt-4">

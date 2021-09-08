@@ -2,7 +2,7 @@
 session_start();
 $title = "Форма авторизации";
 require __DIR__ . '/header.php';
-require "/OpenServer/domains/TaskTestPhpTwo/dbConfig/db.php";
+require "/OpenServer/domains/TaskTestPhp/dbConfig/db.php";
 
 if (isset($_POST['do_login'])) {
 	$errors = array();

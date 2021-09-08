@@ -2,7 +2,7 @@
 session_start();
 $tite = "Форма регистриации";
 require_once __DIR__ . "/header.php";
-require "/OpenServer/domains/TaskTestPhpTwo/dbConfig/db.php";
+require "/OpenServer/domains/TaskTestPhp/dbConfig/db.php";
 
 if (isset($_POST['do_signup'])) {
 	$errors = array();
@@ -90,8 +90,8 @@ if (isset($_POST['do_signup'])) {
 
 	if (empty($errors)) {
 
-		$mysqli->query("INSERT INTO `users` (`login`, `email`, `name`, `surname`,`day`,`month`,`year`,`country`,`privacy`,`password`,`registration_time`)
-		VALUES('$login', '$email', '$name','$surname', '$day', '$month','$year', '$country', '$privacy','$password', '$registrationTime')");
+		$mysqli->query("INSERT INTO `users` (`login`, `email`, `name`, `surname`,`day`,`month`,`year`,`country_id`,`privacy`,`password`,`registration_time`)
+		VALUES('$login', '$email', '$name','$surname', '$day', '$month','$year', '$countryId', '$privacy','$password', '$registrationTime')");
 		$mysqliResult = $mysqli->query("SELECT * FROM `users` WHERE `login` = '$login'");
 		$user = $mysqliResult->fetch_assoc();
 		$_SESSION['logged_user'] = $user;
@@ -157,11 +157,12 @@ if (isset($_POST['do_signup'])) {
 				<tr>
 					<th><label>Выберите город:</label></th>
 					<td>
-						<select name="country" class="form-select" value="">
+						<select name="country_id" class="form-select" value="">
 							<?php
 							while ($rows = $resultSet->fetch_assoc()) {
 								$country = $rows['country'];
-								echo "<option value = '$country'> $country </option>";
+								$countryId = $rows['country_id'];
+								echo "<option value = '$countryId'> $country </option>";
 							}
 							?>
 						</select>
